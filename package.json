@@ -6,16 +6,31 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": "eslint --fix"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
   },
   "dependencies": {
     "expo": "~50.0.8",
     "expo-status-bar": "~1.11.1",
+    "husky": "^9.0.11",
+    "lint-staged": "^15.2.2",
+    "nativewind": "^2.0.11",
     "react": "18.2.0",
     "react-native": "0.73.4"
   },
   "devDependencies": {
-    "@babel/core": "^7.20.0"
+    "@babel/core": "^7.20.0",
+    "tailwindcss": "3.3.2",
+    "husky": "^8.0.0"
   },
   "private": true
 }
