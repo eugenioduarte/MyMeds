@@ -2,7 +2,7 @@ import { StatusBar } from "expo-status-bar";
 import { SafeAreaView, Text, View } from "react-native";
 import Router from "@/navigation";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { NavigationContainer } from "@react-navigation/native";
+import React from "react";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -10,9 +10,7 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1 }}>
       <QueryClientProvider client={queryClient}>
-        <NavigationContainer>
-          <Router />
-        </NavigationContainer>
+        <Router />
       </QueryClientProvider>
       <StatusBar style="auto" />
     </SafeAreaView>
