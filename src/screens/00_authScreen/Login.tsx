@@ -1,59 +1,30 @@
-import React, { useState } from "react";
-import { View, Text, TextInput, Button, Alert } from "react-native";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { useNavigation } from "@react-navigation/native";
+import React from "react";
 import useAuthStore from "@/stores/AuthStore";
+import Container from "@/components/containers/Container";
+import LogoAndTitleAnimation from "./components/LogoAndTitleAnimation";
+import InputAndButton from "./components/InputAndButton";
+import { useNotification } from "@/providers/NotificationProvider";
+import { FirebaseError } from "firebase/app";
 
-type RootStackParamList = {
-  HomeScreen: undefined;
-  LoginScreen: undefined;
-};
-
-type LoginScreenNavigationProp = StackNavigationProp<
-  RootStackParamList,
-  "LoginScreen"
->;
-
-const LoginScreen: React.FC = () => {
-  const navigation = useNavigation<LoginScreenNavigationProp>();
+const LoginScreen = () => {
   const login = useAuthStore((state) => state.login);
-  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const { error } = useNotification();
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
-
-  const handleLogin = async () => {
+  const handleLoginFirebase = async (email: string, password: string) => {
     try {
       await login(email, password);
-    } catch (error) {
-      setError("Failed to login. Please check your credentials.");
-      Alert.alert(
-        "Login Error",
-        "Failed to login. Please check your credentials."
-      );
+    } catch (err) {
+      if (err instanceof FirebaseError) {
+        error(err.code);
+      }
     }
   };
 
   return (
-    <View>
-      <Text>Login</Text>
-      <TextInput
-        placeholder="Email"
-        value={email}
-        onChangeText={setEmail}
-        keyboardType="email-address"
-        autoCapitalize="none"
-      />
-      <TextInput
-        placeholder="Password"
-        value={password}
-        onChangeText={setPassword}
-        secureTextEntry
-      />
-      {error && <Text style={{ color: "red" }}>{error}</Text>}
-      <Button title="Login" onPress={handleLogin} />
-    </View>
+    <Container className="flex-1 items-center justify-center" dark>
+      <LogoAndTitleAnimation />
+      <InputAndButton handleLogin={handleLoginFirebase} />
+    </Container>
   );
 };
 
