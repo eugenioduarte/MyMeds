@@ -1,5 +1,5 @@
-import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 import React from "react";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
 type ButtonRectProps = TouchableOpacityProps & {
   onPress?: () => void;
@@ -20,8 +20,9 @@ const ButtonRect: React.FC<ButtonRectProps> = ({
 }) => {
   return (
     <TouchableOpacity
+      testID="button"
       {...props}
-      className={`${props.className} ${btnStyle} rounded-md px-4 py-2 items-center justify-center`}
+      className={`${btnStyle} rounded-md px-4 py-2 items-center justify-center`}
       onPress={onPress}
     >
       <Text className={`${textStyle} text-xl font-normal`}>{btnText}</Text>
