@@ -69,7 +69,11 @@ const InputAndButton: React.FC<InputAndButtonProps> = ({ handleLogin }) => {
               <Text className="text-red-500">{errors.password}</Text>
             )}
           </View>
-          <ButtonRect btnText="Login" onPress={() => handleSubmit()} />
+          <ButtonRect
+            btnText="Login"
+            onPress={() => handleSubmit()}
+
+          />
           <ButtonLink
             text="Recovery Pass"
             dark={false}

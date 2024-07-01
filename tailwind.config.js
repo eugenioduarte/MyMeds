@@ -1,20 +1,21 @@
+const colors = require("./src/constants/colors");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./App.{js,jsx,ts,tsx}", "./src/**/*.{js,jsx,ts,tsx}"],
   theme: {
     extend: {
       colors: {
-        blue_1: "#000097",
-        blue_2: "#085CF0",
-        blue_3: "#AFE9FD",
-        grey_1: "#e9ecef",
-        grey_2: "#868e96",
-        white: "#f8f9fa",
-        black: "#050A34",
-        red: "#d90429",
+        blue_1: colors.blue_1,
+        blue_2: colors.blue_2,
+        blue_3: colors.blue_3,
+        grey_1: colors.grey_1,
+        grey_2: colors.grey_2,
+        white: colors.white,
+        black: colors.black,
+        red: colors.red,
       },
     },
   },
   plugins: [],
-  
 };
