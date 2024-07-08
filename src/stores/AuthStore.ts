@@ -3,7 +3,6 @@ import { persist } from "zustand/middleware";
 import { secureStore } from "@/service/storage";
 
 interface AuthState {
-  logout: any;
   isAuthenticated: boolean;
   setAuthenticated: (isAuthenticated: boolean) => void;
 }

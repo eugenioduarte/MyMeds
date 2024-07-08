@@ -8,6 +8,7 @@ import NotificationProvider from "@/providers/NotificationProvider";
 import { I18n } from "i18n-js";
 import { translations } from "@/locales/localization";
 import { I18nProvider } from "@/hooks";
+import { white } from "@/constants/colors";
 
 export default function App() {
   const queryClient = new QueryClient();
@@ -17,7 +18,7 @@ export default function App() {
   i18n.defaultLocale = "en";
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#000097" }}>
+    <SafeAreaView style={{ flex: 1, backgroundColor: white }}>
       <I18nProvider i18n={i18n}>
         <NotificationProvider>
           <QueryClientProvider client={queryClient}>
