@@ -1,11 +1,14 @@
-import { View, Text } from "react-native";
 import React from "react";
+import Container from "@/components/containers/Container";
+import Text from "@/components/Text/Text";
+import { CalendarHorizontalScroll, MedicationsList } from "./components";
 
 const Main = () => {
   return (
-    <View>
-      <Text>Main</Text>
-    </View>
+    <Container>
+      <CalendarHorizontalScroll />
+      <MedicationsList />
+    </Container>
   );
 };
 

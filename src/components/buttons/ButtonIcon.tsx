@@ -12,7 +12,7 @@ type ButtonIconProps = TouchableOpacityProps & {
 const ButtonIcon: React.FC<ButtonIconProps> = ({
   onPress,
   children,
-  size = 10,
+  size = 8,
   ...props
 }) => {
   return (

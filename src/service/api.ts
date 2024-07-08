@@ -7,7 +7,6 @@ type LoginProps = {
 };
 
 export const login = async ({ email, password }: LoginProps) => {
-  console.log("login");
   const userCredential = await signInWithEmailAndPassword(
     auth,
     email,

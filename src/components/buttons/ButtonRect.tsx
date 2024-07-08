@@ -25,7 +25,7 @@ const ButtonRect: React.FC<ButtonRectProps> = ({
       className={`${btnStyle} rounded-md px-4 py-2 items-center justify-center`}
       onPress={onPress}
     >
-      <Text className={`${textStyle} text-xl font-normal`}>{btnText}</Text>
+      <Text className={`text-xl font-normal ${textStyle} `}>{btnText}</Text>
     </TouchableOpacity>
   );
 };

@@ -10,7 +10,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import FeedHeader from "@/components/headers/headerFeed/HeaderFeed";
+import FeedHeader from "@/components/headers/principalHeader/PrincipalHeader";
 import useAuthStore from "@/stores/AuthStore";
 import colors from "@/constants/colors";
 
@@ -43,6 +43,7 @@ export const routesNames = {
   OnboardScreen: "OnboardScreen",
   MedicationScreen: "MedicationScreen",
   MedicationDetailsScreen: "MedicationDetailsScreen",
+  AddMedication: "AddMedication",
 };
 
 function MainStackScreen() {
@@ -52,14 +53,6 @@ function MainStackScreen() {
       <HomeStack.Screen
         component={OnboardScreen}
         name={routesNames.OnboardScreen}
-      />
-      <HomeStack.Screen
-        component={MedicationScreen}
-        name={routesNames.MedicationScreen}
-      />
-      <HomeStack.Screen
-        component={MedicationDetailsScreen}
-        name={routesNames.MedicationDetailsScreen}
       />
     </HomeStack.Navigator>
   );
@@ -82,6 +75,14 @@ function PrescriptionStackScreen() {
       <HomeStack.Screen
         component={PrescriptionScreen}
         name={routesNames.PrescriptionScreen}
+      />
+      <HomeStack.Screen
+        component={MedicationScreen}
+        name={routesNames.MedicationScreen}
+      />
+      <HomeStack.Screen
+        component={MedicationDetailsScreen}
+        name={routesNames.MedicationDetailsScreen}
       />
     </HomeStack.Navigator>
   );
@@ -115,11 +116,9 @@ function MyTabs() {
     <Tab.Navigator
       screenOptions={{
         tabBarLabelStyle: {
-          display: "none",
+          display: "flex",
         },
-        headerStyle: {
-          backgroundColor: colors.red,
-        },
+        headerShown: false,
       }}
     >
       <Tab.Screen
