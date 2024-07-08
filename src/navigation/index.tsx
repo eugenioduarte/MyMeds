@@ -7,69 +7,81 @@ import {
   createDrawerNavigator,
 } from "@react-navigation/drawer";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import {
-  NavigationContainer,
-  NavigationProp,
-  useNavigation,
-} from "@react-navigation/native";
+import { NavigationContainer } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import LoginScreen from "../screens/00_authScreen/Login";
-import { FeedScreen } from "../screens/01_feedScreen/index";
-import { NewsScreen } from "@/screens/02_newsScreen/index";
-import { EventsScreen } from "@/screens/03_eventsScreen/index";
-import {
-  ProfileScreen,
-  ForumScreen,
-  ChatScreen,
-} from "../screens/04_profileScreen/index";
-import { HandBookScreen } from "../screens/05_handBookScreen/index";
-
-import SettingsScreen from "../screens/settingsScreen/Settings";
 import FeedHeader from "@/components/headers/headerFeed/HeaderFeed";
-import DrawerContent from "@/components/drawerContent/DrawerContent";
 import useAuthStore from "@/stores/AuthStore";
-import { Auth, signOut } from "firebase/auth";
-import { auth } from "@/service/firebase";
+import colors from "@/constants/colors";
+
+import { MainScreen } from "@/screens/main";
+import { LoginScreen, RecoveryPassScreen } from "@/screens/login";
+import { CalendarScreen } from "@/screens/calendar";
+import { PrescriptionScreen } from "@/screens/prescription";
+import { ProfileScreen } from "@/screens/profile";
+import { OnboardScreen } from "@/screens/onboard";
+import { SettingsScreen } from "@/screens/settings";
+import {
+  MedicationScreen,
+  MedicationDetailsScreen,
+} from "@/screens/medication";
 
 const HomeStack = createStackNavigator();
 const SettingsStack = createStackNavigator();
 
 export const routesNames = {
   LoginScreen: "LoginScreen",
+  RecoveryPassScreen: "RecoveryPassScreen",
+  AuthRoute: "AuthRoute",
   MainRoute: "MainRoute",
-  FeedScreen: "FeedScreen",
-  NewsScreen: "NewsScreen",
-  EventsScreen: "EventsScreen",
+  CalendarRoute: "CalendarRoute",
+  MainScreen: "MainScreen",
+  CalendarScreen: "CalendarScreen",
+  PrescriptionScreen: "PrescriptionScreen",
   ProfileScreen: "ProfileScreen",
-  HandBookScreen: "HandBookScreen",
   SettingsScreen: "SettingsScreen",
-  ForumScreen: "ForumScreen",
-  ChatScreen: "ChatScreen",
+  OnboardScreen: "OnboardScreen",
+  MedicationScreen: "MedicationScreen",
+  MedicationDetailsScreen: "MedicationDetailsScreen",
 };
 
-function FeedStackScreen() {
+function MainStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen component={FeedScreen} name={routesNames.FeedScreen} />
+      <HomeStack.Screen component={MainScreen} name={routesNames.MainScreen} />
+      <HomeStack.Screen
+        component={OnboardScreen}
+        name={routesNames.OnboardScreen}
+      />
+      <HomeStack.Screen
+        component={MedicationScreen}
+        name={routesNames.MedicationScreen}
+      />
+      <HomeStack.Screen
+        component={MedicationDetailsScreen}
+        name={routesNames.MedicationDetailsScreen}
+      />
     </HomeStack.Navigator>
   );
 }
 
-function NewsStackScreen() {
-  return (
-    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen component={NewsScreen} name={routesNames.NewsScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
-function EventsStackScreen() {
+function CalendarStackScreen() {
   return (
     <HomeStack.Navigator screenOptions={{ headerShown: false }}>
       <HomeStack.Screen
-        component={EventsScreen}
-        name={routesNames.EventsScreen}
+        component={CalendarScreen}
+        name={routesNames.CalendarScreen}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
+function PrescriptionStackScreen() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen
+        component={PrescriptionScreen}
+        name={routesNames.PrescriptionScreen}
       />
     </HomeStack.Navigator>
   );
@@ -82,34 +94,18 @@ function ProfileStackScreen() {
         component={ProfileScreen}
         name={routesNames.ProfileScreen}
       />
-      <HomeStack.Screen
-        component={ForumScreen}
-        name={routesNames.ForumScreen}
-      />
-      <HomeStack.Screen component={ChatScreen} name={routesNames.ChatScreen} />
-    </HomeStack.Navigator>
-  );
-}
-
-function HandBookStackScreen() {
-  return (
-    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
-      <HomeStack.Screen
-        component={HandBookScreen}
-        name={routesNames.HandBookScreen}
-      />
     </HomeStack.Navigator>
   );
 }
 
 function SettingsStackScreen() {
   return (
-    <SettingsStack.Navigator screenOptions={{ headerShown: false }}>
-      <SettingsStack.Screen
-        name={routesNames.SettingsScreen}
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen
         component={SettingsScreen}
+        name={routesNames.SettingsScreen}
       />
-    </SettingsStack.Navigator>
+    </HomeStack.Navigator>
   );
 }
 
@@ -122,13 +118,13 @@ function MyTabs() {
           display: "none",
         },
         headerStyle: {
-          backgroundColor: "#f4511e",
+          backgroundColor: colors.red,
         },
       }}
     >
       <Tab.Screen
-        name={routesNames.FeedScreen}
-        component={FeedStackScreen}
+        name={routesNames.MainRoute}
+        component={MainStackScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="home" color={color} size={size} />
@@ -136,8 +132,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name={routesNames.NewsScreen}
-        component={NewsStackScreen}
+        name={routesNames.CalendarRoute}
+        component={CalendarStackScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="article" color={color} size={size} />
@@ -145,8 +141,8 @@ function MyTabs() {
         }}
       />
       <Tab.Screen
-        name={routesNames.EventsScreen}
-        component={EventsStackScreen}
+        name={routesNames.PrescriptionScreen}
+        component={PrescriptionStackScreen}
         options={{
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="event" color={color} size={size} />
@@ -162,22 +158,13 @@ function MyTabs() {
           ),
         }}
       />
-      <Tab.Screen
-        name={routesNames.HandBookScreen}
-        component={HandBookStackScreen}
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <MaterialIcons name="book" color={color} size={size} />
-          ),
-        }}
-      />
     </Tab.Navigator>
   );
 }
 
 const Drawer = createDrawerNavigator();
 
-const CustomDrawerContent = (props) => {
+const CustomDrawerContent = (props: any) => {
   const logout = useAuthStore((state) => state.logout);
 
   const handleLogout = async () => {
@@ -196,13 +183,22 @@ const CustomDrawerContent = (props) => {
   );
 };
 
+function AuthStackScreen() {
+  return (
+    <HomeStack.Navigator screenOptions={{ headerShown: false }}>
+      <HomeStack.Screen
+        component={LoginScreen}
+        name={routesNames.LoginScreen}
+      />
+      <HomeStack.Screen
+        component={RecoveryPassScreen}
+        name={routesNames.RecoveryPassScreen}
+      />
+    </HomeStack.Navigator>
+  );
+}
+
 function MainRoute() {
-  useEffect(() => {}, []);
-
-  const handleLogout = async () => {
-    // await logout();
-  };
-
   return (
     <Drawer.Navigator
       drawerContent={(props) => <CustomDrawerContent {...props} />}
@@ -237,8 +233,8 @@ const Router: React.FC = () => {
           />
         ) : (
           <RootStack.Screen
-            name={routesNames.LoginScreen}
-            component={LoginScreen}
+            name={routesNames.AuthRoute}
+            component={AuthStackScreen}
           />
         )}
       </RootStack.Navigator>

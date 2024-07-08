@@ -1,3 +1,4 @@
+import colors from "@/constants/colors";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 
@@ -44,12 +45,12 @@ const NotificationProvider = ({ children }: { children: ReactNode }) => {
       <View style={styles.container}>
         {notifications.map((msg, index) => (
           <View key={index} style={styles.notification}>
-            <Text style={styles.text}>{msg}</Text>
+            <Text className="color-white text-md">{msg}</Text>
           </View>
         ))}
         {errors.map((msg, index) => (
           <View key={index} style={[styles.notification, styles.error]}>
-            <Text style={styles.text}>{msg}</Text>
+            <Text className="color-white text-md">{msg}</Text>
           </View>
         ))}
       </View>
@@ -67,16 +68,13 @@ const styles = StyleSheet.create({
     zIndex: 1000,
   },
   notification: {
-    backgroundColor: "green",
+    backgroundColor: colors.blue_2,
     padding: 10,
     margin: 5,
     borderRadius: 5,
   },
   error: {
-    backgroundColor: "red",
-  },
-  text: {
-    color: "white",
+    backgroundColor: colors.red,
   },
 });
 
