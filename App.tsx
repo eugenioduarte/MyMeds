@@ -4,7 +4,7 @@ import Router from "@/navigation";
 import { QueryClient, QueryClientProvider } from "react-query";
 import React, { useState } from "react";
 import NotificationProvider from "@/providers/NotificationProvider";
-
+import LoadingProvider from "@/providers/LoadingProvider";
 import { I18n } from "i18n-js";
 import { translations } from "@/locales/localization";
 import { I18nProvider } from "@/hooks";
@@ -20,11 +20,13 @@ export default function App() {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: white }}>
       <I18nProvider i18n={i18n}>
-        <NotificationProvider>
-          <QueryClientProvider client={queryClient}>
-            <Router />
-          </QueryClientProvider>
-        </NotificationProvider>
+        <LoadingProvider>
+          <NotificationProvider>
+            <QueryClientProvider client={queryClient}>
+              <Router />
+            </QueryClientProvider>
+          </NotificationProvider>
+        </LoadingProvider>
       </I18nProvider>
     </SafeAreaView>
   );

@@ -1,29 +1,30 @@
 import { Text, TouchableOpacity } from "react-native";
 import React from "react";
+import { format } from "date-fns";
 type CalendarDayCardProps = {
-  active: number;
+  active: boolean;
   setActive: () => void;
-  index: number;
+  date?: Date;
 };
 const CalendarDayCard = ({
   active,
   setActive,
-  index,
+  date = new Date(),
 }: CalendarDayCardProps) => {
+  const dayOfWeek = format(date, "EEE");
+  const currentDay = format(date, "dd");
   return (
     <TouchableOpacity
-      className={`w-12 h-14 flex items-center justify-center mx-1 rounded-xl ${active == index ? "bg-blue_1" : "bg-white"} `}
+      className={`w-12 h-14 flex items-center justify-center mx-1 rounded-xl ${active ? "bg-blue_1" : "bg-white"} `}
       onPress={setActive}
     >
-      <Text
-        className={`${active == index ? "text-grey_1" : "text-blue_1"} text-xs`}
-      >
-        Wed
+      <Text className={`${active ? "text-grey_1" : "text-blue_1"} text-xs`}>
+        {dayOfWeek}
       </Text>
       <Text
-        className={`${active == index ? "text-white font-black" : "text-blue_1"} mt-1 `}
+        className={`${active ? "text-white font-black" : "text-blue_1"} mt-1 `}
       >
-        3
+        {currentDay}
       </Text>
     </TouchableOpacity>
   );
