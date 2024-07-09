@@ -15,3 +15,5 @@ yarn lint-staged
 # ci: Mudanças em arquivos e scripts de configuração de CI (exemplos de escopo: Travis, Circle, BrowserStack, SauceLabs).
 # chore: Outras mudanças que não modificam arquivos de código ou testes.
 # revert: Revertendo um commit anterior.
+
+
