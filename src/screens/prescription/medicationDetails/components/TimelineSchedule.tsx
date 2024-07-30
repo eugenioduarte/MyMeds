@@ -2,8 +2,9 @@ import { View } from "react-native";
 import React from "react";
 import Text from "@/components/Text/Text";
 import ButtonTextChevron from "@/components/buttons/ButtonTextChevron";
-import ButtonIcon from "@/components/buttons/ButtonIcon";
 import TimelineScheduleTimeCard from "./TimelineScheduleTimeCard";
+import ModalTimePicker from "@/components/modals/ModalTimePicker";
+import ModalDurationPicker from "@/components/modals/ModalDurationPicker";
 
 enum TimePeriodGetTypeEnum {
   GetTime = 1,
@@ -16,8 +17,25 @@ const TimelineSchedule = () => {
   const [duration, setDuration] = React.useState<string>("");
   const [frequency, setFrequency] = React.useState<string>("");
 
+  const [timePickerModalVisible, setTimePickerModalVisible] =
+    React.useState(false);
+  const [durationPickerModalVisible, setDurationPickerModalVisible] =
+    React.useState(false);
+
   const openModalPicker = (typeModal: number) => {
-    console.log("open Modal TimePicker", typeModal);
+    switch (typeModal) {
+      case TimePeriodGetTypeEnum.GetTime:
+        setTimePickerModalVisible(true);
+        break;
+
+      default:
+        break;
+    }
+  };
+
+  const handleRemoveTime = (index: number) => {
+    const newTimePeriod = timePeriod.filter((_, i) => i !== index);
+    setTimePeriod(newTimePeriod);
   };
 
   return (
@@ -28,6 +46,9 @@ const TimelineSchedule = () => {
       <TimelineScheduleTimeCard
         value={timePeriod}
         handleButtonPress={() => openModalPicker(TimePeriodGetTypeEnum.GetTime)}
+        handleRemoveTime={(index) => {
+          handleRemoveTime(index);
+        }}
       />
       <ButtonTextChevron
         placeholder="Duration"
@@ -38,6 +59,14 @@ const TimelineSchedule = () => {
         placeholder="Frequency"
         value={frequency}
         setValue={() => openModalPicker(TimePeriodGetTypeEnum.GetFrequency)}
+      />
+      <ModalTimePicker
+        visible={timePickerModalVisible}
+        closeModal={() => setTimePickerModalVisible(false)}
+      />
+      <ModalDurationPicker
+        visible={durationPickerModalVisible}
+        closeModal={() => setDurationPickerModalVisible(false)}
       />
     </View>
   );
