@@ -10,9 +10,8 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { NavigationContainer } from "@react-navigation/native";
 import { MaterialIcons } from "@expo/vector-icons";
 
-import FeedHeader from "@/components/headers/principalHeader/PrincipalHeader";
+import PrincipalHeader from "@/components/headers/principalHeader/PrincipalHeader";
 import useAuthStore from "@/stores/AuthStore";
-import colors from "@/constants/colors";
 
 import { MainScreen } from "@/screens/main";
 import { LoginScreen, RecoveryPassScreen } from "@/screens/login";
@@ -206,7 +205,7 @@ function MainRoute() {
         name="Tabs"
         component={MyTabs}
         options={{
-          header: () => <FeedHeader />,
+          header: () => <PrincipalHeader />,
           headerShown: true,
         }}
       />

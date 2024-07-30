@@ -10,7 +10,7 @@ const Container: React.FC<ContainerProps> = ({ dark, children, ...props }) => {
   return (
     <View
       {...props}
-      className={`flex-1 items-start justify-start ${dark ? "bg-blue_1" : "bg-white"}`}
+      className={`p-2 flex-1 items-start justify-start ${dark ? "bg-blue_1" : "bg-white"}`}
     >
       {children}
     </View>

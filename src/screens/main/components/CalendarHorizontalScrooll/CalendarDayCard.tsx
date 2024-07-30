@@ -15,7 +15,7 @@ const CalendarDayCard = ({
   const currentDay = format(date, "dd");
   return (
     <TouchableOpacity
-      className={`w-12 h-14 flex items-center justify-center mx-1 rounded-xl ${active ? "bg-blue_1" : "bg-white"} `}
+      className={`w-12 h-14 flex items-center justify-center mx-1 rounded-xl ${active ? "bg-blue_1" : "bg-grey_3"} `}
       onPress={setActive}
     >
       <Text className={`${active ? "text-grey_1" : "text-blue_1"} text-xs`}>

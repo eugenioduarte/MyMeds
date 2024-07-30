@@ -1,12 +1,12 @@
 import { View, Text } from "react-native";
 import React from "react";
 
-const MedicationDetails = () => {
+const MedicationHeaderList = () => {
   return (
     <View>
-      <Text>MedicationDetails</Text>
+      <Text>MedicationHeaderList</Text>
     </View>
   );
 };
 
-export default MedicationDetails;
+export default MedicationHeaderList;
