@@ -7,19 +7,21 @@ type ButtonIconProps = TouchableOpacityProps & {
   onPress?: () => void;
   children?: React.ReactNode;
   size?: number;
+  btnStyle?: string;
 };
 
 const ButtonIcon: React.FC<ButtonIconProps> = ({
   onPress,
   children,
   size = 8,
+  btnStyle,
   ...props
 }) => {
   return (
     <TouchableOpacity
       testID="button"
       {...props}
-      className={`mx-2 rounded-full items-center justify-center bg-white  ${"w-" + size + " h-" + size}`}
+      className={`mx-2 rounded-full items-center justify-center  ${"w-" + size + " h-" + size} `}
       onPress={onPress}
     >
       {children ? (

@@ -1,35 +1,48 @@
 import { View, Text } from "react-native";
-import React, { useEffect, useState } from "react";
+import React from "react";
 import CalendarDayContainer from "./CalendarDayContainer";
-import { format, formatRelative } from "date-fns";
-import { useLoading } from "@/providers/LoadingProvider";
+import {
+  addDays,
+  format,
+  formatRelative,
+  isAfter,
+  isBefore,
+  subDays,
+} from "date-fns";
+import { useDateContext } from "@/hooks/CalendarContext";
 
 const CalendarHorizontalScroll = () => {
-  const { notifyLoading } = useLoading();
-  const [selectedDate, setSelectedDate] = useState(new Date());
+  const { selectedDate } = useDateContext();
+
   const getRelativeLabel = (date: Date) => {
-    const relativeDate = formatRelative(date, new Date());
+    const today = new Date();
+    const threeDaysAgo = subDays(today, 5);
+    const threeDaysFromNow = addDays(today, 5);
+
+    if (isBefore(date, threeDaysAgo) || isAfter(date, threeDaysFromNow)) {
+      return format(date, "dd, MMMM:");
+    }
+
+    const relativeDate = formatRelative(date, today);
     return (
       relativeDate.split(" at ")[0].charAt(0).toUpperCase() +
       relativeDate.split(" at ")[0].slice(1)
     );
   };
 
-  useEffect(() => {
-    notifyLoading(true);
-    // setTimeout(() => {
-    //   notifyLoading(false);
-    // }, 2000);
-  }, []);
-
   return (
-    <View className="w-full flex items-start justify-start p-2">
+    <View className="w-full flex items-start justify-start p-2 mt-5 ">
       <Text className="text-grey_2 text-md">
         {format(selectedDate, "MMMM, dd")}
       </Text>
-      <Text className="text-black text-xl font-semibold">
-        {getRelativeLabel(selectedDate)} reminders
-      </Text>
+      <View className="flex-row items-center justify-between  w-full">
+        <Text className="text-black text-xl font-semibold">
+          {getRelativeLabel(selectedDate)} reminders
+        </Text>
+        <Text className="text-black text-xl font-normal">
+          {format(selectedDate, "yyyy")}
+        </Text>
+      </View>
       <CalendarDayContainer />
     </View>
   );

@@ -27,39 +27,38 @@ const NotificationProvider = ({
   children: ReactNode;
   isFullScreen?: boolean;
 }) => {
-  const [loading, setLoading] = useState<boolean>(true);
+  const [loading, setLoading] = useState<boolean>(false);
 
   const notifyLoading = (flag: boolean) => {
     setLoading(flag);
   };
-// Loading and notification provider is used to show a loading spinner when the app is loading data.
+
   return (
     <LoadingContext.Provider value={{ notifyLoading }}>
       {children}
-      <View className=" absolute flex-1 h-full w-full items-center justify-center">
-        <BlurView
-          intensity={100}
-          tint="light"
-          className="p-4 items-center justify-center rounded-xl overflow-hidden"
-        >
-          {loading && (
-            <>
-              <LottieView
-                autoPlay
-                loop={false}
-                style={{
-                  width: 200,
-                  height: 200,
-                }}
-                source={require("@assets/animations/pill_animation.json")}
-              />
-              <Text className="p-2 text-white font-bold text-2xl">
-                Loading ...
-              </Text>
-            </>
-          )}
-        </BlurView>
-      </View>
+
+      {loading && (
+        <View className=" absolute flex-1 h-full w-full items-center justify-center">
+          <BlurView
+            intensity={100}
+            tint="light"
+            className="p-4 items-center justify-center rounded-xl overflow-hidden"
+          >
+            <LottieView
+              autoPlay
+              loop={false}
+              style={{
+                width: 200,
+                height: 200,
+              }}
+              source={require("@assets/animations/pill_animation.json")}
+            />
+            <Text className="p-2 text-white font-bold text-2xl">
+              Loading ...
+            </Text>
+          </BlurView>
+        </View>
+      )}
     </LoadingContext.Provider>
   );
 };

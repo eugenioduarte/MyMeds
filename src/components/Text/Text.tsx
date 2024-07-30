@@ -7,6 +7,9 @@ type TextProps = RNTextProps & {
   dark?: boolean;
   light?: boolean;
   variant?: "title" | "subtitle" | "body";
+  small?: boolean;
+  medium?: boolean;
+  large?: boolean;
 };
 
 const defaultTextStyle = "text-blue_1 text-xl font-normal";
@@ -26,13 +29,18 @@ const Text: React.FC<TextProps> = ({
   light,
   variant = "body",
   style,
+  small,
+  medium,
+  large,
   ...props
 }) => {
   const variantStyle = variants[variant];
 
   return (
     <StyledText
-      className={`${defaultTextStyle} ${variantStyle} ${className} ${dark ? "text-blue_1" : ""} ${light ? "text-white" : ""}`}
+      className={`${defaultTextStyle} ${variantStyle} ${className} ${dark ? "text-blue_1" : ""} ${light ? "text-white" : ""} ${small ? "text-sm" : ""} 
+      ${medium ? "text-base" : ""} 
+      ${large ? "text-lg" : ""}`}
       style={style}
       {...props}
     >

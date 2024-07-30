@@ -1,7 +1,9 @@
 import Prescription from "./Prescription";
 import Medication from "./Medication";
-import MedicationDetails from "./MedicationDetails";
+import MedicationDetails from "./medicationDetails/MedicationDetails";
 
-export const PrescriptionScreen = Prescription;
-export const MedicationScreen = Medication;
-export const MedicationDetailsScreen = MedicationDetails;
+export {
+  Prescription as PrescriptionScreen,
+  Medication as MedicationScreen,
+  MedicationDetails as MedicationDetailsScreen,
+};
