@@ -4,13 +4,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 // Sua configuração do Firebase
 const firebaseConfig = {
-  apiKey: "AIzaSyDxcR4jzDm7WAJJyi_Myh0nySQmFcGlXw4",
-  authDomain: "solarmind-adc9b.firebaseapp.com",
-  projectId: "solarmind-adc9b",
-  storageBucket: "solarmind-adc9b.appspot.com",
-  messagingSenderId: "773069618520",
-  appId: "1:773069618520:web:deb3c8917afa2deb5c392d",
-  measurementId: "G-WT7P3QJSB7",
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASUREMENT_ID,
 };
 
 // Inicializar o Firebase
